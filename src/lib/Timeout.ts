@@ -33,7 +33,7 @@ class Timeout<Result, Err extends Error, Params extends object> extends Task<
             super({
                 isInterval: false,
                 source: paramsOrFunction,
-                intervalTimer: ms,
+                plannedTime: Date.now() + (ms as number),
                 ...additionalParams,
             });
         } else {
