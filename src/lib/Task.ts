@@ -316,14 +316,14 @@ class Task<
      * Task is the interval
      */
     public isInterval(): this is Interval<Result, Err, Params> {
-        return this instanceof Interval;
+        return this.service.isInterval;
     }
 
     /**
      * Task is the timeout
      */
     public isTimeout(): this is Timeout<Result, Err, Params> {
-        return this instanceof Timeout;
+        return !(this.service.isInterval);
     }
 
     private _setNextExecuteTime(): void {
