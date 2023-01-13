@@ -15,6 +15,9 @@ import cronParser from "cron-parser";
 import scheduler from "./core";
 import manager from "./manager";
 
+import Interval from "./Interval";
+import Timeout from "./Timeout";
+
 class Task<
     Result = unknown,
     Err extends Error = Error,
@@ -307,6 +310,20 @@ class Task<
 
             return { response: response as Result, ...extendsTaskMetaInfo };
         }
+    }
+
+    /**
+     * Task is the interval
+     */
+    public isInterval(): this is Interval<Result, Err, Params> {
+        return this instanceof Interval;
+    }
+
+    /**
+     * Task is the timeout
+     */
+    public isTimeout(): this is Timeout<Result, Err, Params> {
+        return this instanceof Timeout;
     }
 
     private _setNextExecuteTime(): void {
